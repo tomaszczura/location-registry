@@ -1,0 +1,1 @@
+loction_registry
