@@ -4,25 +4,25 @@ import android.content.Context
 import com.example.astalos.locationregistry.model.repository.LocationsRepository
 import com.example.astalos.locationregistry.model.repository.UsersRepository
 import com.example.astalos.locationregistry.presentation.RegistryApplication
-import dagger.Binds
 import dagger.Module
+import dagger.Provides
 import javax.inject.Singleton
 
 /**
  * @author Tomasz Czura on 9/4/18.
  */
 @Module
-abstract class ApplicationModule(private val application: RegistryApplication) {
+class ApplicationModule(private val application: RegistryApplication) {
 
-    @Binds
+    @Provides
     @Singleton
     fun provideApplicationContext(): Context = application
 
-    @Binds
+    @Provides
     @Singleton
-    abstract fun providesLocationsRespository(repository: LocationsRepository)
+    fun providesLocationsRespository(repository: LocationsRepository) = repository
 
-    @Binds
+    @Provides
     @Singleton
-    abstract fun providesUsersRespository(repository: UsersRepository)
+    fun providesUsersRespository(repository: UsersRepository) = repository
 }
