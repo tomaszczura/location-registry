@@ -22,4 +22,6 @@ abstract class UseCase<out Type, in Params> where Type : Any {
     fun execute(onResult: (OneOf<Failure, Type>) -> Unit) {
         execute(null, onResult)
     }
+
+    class None
 }
