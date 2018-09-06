@@ -16,7 +16,7 @@ import org.mockito.runners.MockitoJUnitRunner
  * @author Tomasz Czura on 9/4/18.
  */
 @RunWith(MockitoJUnitRunner::class)
-class SaveUserTest {
+class SaveUserTests {
 
     private lateinit var saveUser: SaveUser
 

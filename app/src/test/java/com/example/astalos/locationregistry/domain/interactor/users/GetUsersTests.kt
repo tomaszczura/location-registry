@@ -19,7 +19,7 @@ import org.mockito.runners.MockitoJUnitRunner
  * @author Tomasz Czura on 9/6/18.
  */
 @RunWith(MockitoJUnitRunner::class)
-class GetUsersTest {
+class GetUsersTests {
     private lateinit var getUsers: GetUsers
     private var users = listOf(User(1, "Test user"))
 

@@ -15,20 +15,20 @@ import org.mockito.runners.MockitoJUnitRunner
  * @author Tomasz Czura on 9/6/18.
  */
 @RunWith(MockitoJUnitRunner::class)
-class SetActiveUserTest {
-    private lateinit var setActiveUser: SetActiveUser
+class RemoveUserTests {
+    private lateinit var removeUser: RemoveUser
 
     @Mock
     private lateinit var usersRepository: IUsersRepository
 
     @Before
     fun setUp() {
-        setActiveUser = SetActiveUser(usersRepository)
+        removeUser = RemoveUser(usersRepository)
     }
 
     @Test
-    fun `should call usersRepository setActiveUser `() {
-        runBlocking { setActiveUser.run(UserIdParams(1)) }
-        verify(usersRepository, times(1)).setActiveUser(1)
+    fun `should call usersRepository removeUser `() {
+        runBlocking { removeUser.run(UserIdParams(1)) }
+        verify(usersRepository, times(1)).removeUser(1)
     }
 }
