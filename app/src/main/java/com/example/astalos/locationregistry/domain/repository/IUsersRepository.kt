@@ -7,8 +7,9 @@ import com.example.astalos.locationregistry.domain.entities.User
  */
 interface IUsersRepository {
     fun setActiveUser(userId: Int): OneOf<Failure, User>
+    fun getActiveUser(): OneOf<Failure, User?>
     fun createUser(user: User): OneOf<Failure, User>
-    fun removeUser(userId: Int): OneOf<Failure, User>
+    fun removeUser(userId: Int): OneOf<Failure, User?>
     fun editUser(user: User): OneOf<Failure, User>
     fun users(): OneOf<Failure, List<User>>
 }

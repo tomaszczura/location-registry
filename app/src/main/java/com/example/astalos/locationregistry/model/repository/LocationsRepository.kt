@@ -10,10 +10,21 @@ import javax.inject.Inject
  * @author Tomasz Czura on 9/4/18.
  */
 class LocationsRepository @Inject constructor(): ILocationsRepository {
-    override fun locations(userId: Int): OneOf<Failure, List<UserLocation>> = OneOf.Success(emptyList())
+    private val locations = mutableListOf<UserLocation>()
 
-    override fun addLocation(location: UserLocation): OneOf<Failure, UserLocation> = OneOf.Success(UserLocation(0, 0.0, 0.0, 0L, 0))
+    override fun locations(userId: Int): OneOf<Failure, List<UserLocation>> = OneOf.Success(locations)
 
-    override fun removeLocation(locationId: Int): OneOf<Failure, UserLocation> = OneOf.Success(UserLocation(0, 0.0, 0.0, 0L, 0))
+    override fun addLocation(location: UserLocation): OneOf<Failure, UserLocation> {
+        val addedLocation = location.copy(id = 1)
+        locations.add(addedLocation)
+        return OneOf.Success(addedLocation)
+    }
+
+    override fun removeLocation(locationId: Int): OneOf<Failure, UserLocation> {
+        val index = locations.indexOfFirst { it.id == locationId }
+        val location = locations[index]
+        locations.removeAt(index)
+        return OneOf.Success(location)
+    }
 
 }
