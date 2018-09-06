@@ -1,4 +1,4 @@
-package com.example.astalos.locationregistry.model.repository
+package com.example.astalos.locationregistry.model.repository.memory
 
 import com.example.astalos.locationregistry.domain.entities.UserLocation
 import com.example.astalos.locationregistry.domain.repository.Failure
@@ -9,13 +9,13 @@ import javax.inject.Inject
 /**
  * @author Tomasz Czura on 9/4/18.
  */
-class LocationsRepository @Inject constructor(): ILocationsRepository {
+class MemoryLocationsRepository @Inject constructor(): ILocationsRepository {
     private val locations = mutableListOf<UserLocation>()
 
     override fun locations(userId: Int): OneOf<Failure, List<UserLocation>> = OneOf.Success(locations)
 
     override fun addLocation(location: UserLocation): OneOf<Failure, UserLocation> {
-        val addedLocation = location.copy(id = 1)
+        val addedLocation = location.copy(id = locations.size + 1)
         locations.add(addedLocation)
         return OneOf.Success(addedLocation)
     }

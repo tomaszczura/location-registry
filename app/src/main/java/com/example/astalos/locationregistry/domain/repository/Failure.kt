@@ -5,6 +5,7 @@ package com.example.astalos.locationregistry.domain.repository
  */
 sealed class Failure {
     class UnknownFailure : Failure()
+    class NoUserFailure : Failure()
 
     abstract class DetailedFailure: Failure()
 }

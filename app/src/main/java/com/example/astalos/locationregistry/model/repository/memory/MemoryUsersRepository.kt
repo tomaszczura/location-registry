@@ -1,4 +1,4 @@
-package com.example.astalos.locationregistry.model.repository
+package com.example.astalos.locationregistry.model.repository.memory
 
 import com.example.astalos.locationregistry.domain.entities.User
 import com.example.astalos.locationregistry.domain.repository.Failure
@@ -8,18 +8,22 @@ import com.example.astalos.locationregistry.domain.repository.OneOf
 /**
  * @author Tomasz Czura on 9/4/18.
  */
-class UsersRepository : IUsersRepository {
+class MemoryUsersRepository : IUsersRepository {
 
     private val users = mutableMapOf<Int, User>()
     private var activeUserId: Int = 0
 
     override fun setActiveUser(userId: Int): OneOf<Failure, User> {
-        activeUserId = userId
-        return OneOf.Success(users[activeUserId]!!)
+        return if (users[userId] != null) {
+            activeUserId = userId
+            OneOf.Success(users[activeUserId]!!)
+        } else {
+            OneOf.Error(Failure.NoUserFailure())
+        }
     }
 
     override fun createUser(user: User): OneOf<Failure, User> {
-        val addedUser = user.copy(id = users.size)
+        val addedUser = user.copy(id = users.size + 1)
         users[addedUser.id!!] = addedUser
         return OneOf.Success(addedUser)
     }
