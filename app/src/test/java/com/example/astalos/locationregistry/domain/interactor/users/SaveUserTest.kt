@@ -2,7 +2,7 @@ package com.example.astalos.locationregistry.domain.interactor.users
 
 import com.example.astalos.locationregistry.domain.entities.User
 import com.example.astalos.locationregistry.domain.interactor.UserParams
-import com.example.astalos.locationregistry.model.repository.UsersRepository
+import com.example.astalos.locationregistry.domain.repository.IUsersRepository
 import com.nhaarman.mockito_kotlin.times
 import com.nhaarman.mockito_kotlin.verify
 import kotlinx.coroutines.experimental.runBlocking
@@ -20,7 +20,7 @@ class SaveUserTest {
 
     private lateinit var saveUser: SaveUser
 
-    @Mock private lateinit var usersRepository: UsersRepository
+    @Mock private lateinit var usersRepository: IUsersRepository
 
     @Before fun setUp() {
         saveUser = SaveUser(usersRepository)
