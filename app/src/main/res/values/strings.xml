@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">LocationRegistry</string>
+    <string name="menu_locations">Locations</string>
+    <string name="menu_users">Users</string>
 </resources>

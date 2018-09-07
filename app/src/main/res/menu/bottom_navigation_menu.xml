@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/locations_list"
+        android:icon="@drawable/ic_locations"
+        android:title="@string/menu_locations"/>
+    <item
+        android:id="@+id/users_list"
+        android:icon="@drawable/ic_users"
+        android:title="@string/menu_users"/>
+</menu>
