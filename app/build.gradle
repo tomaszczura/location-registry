@@ -39,6 +39,9 @@ ext {
     mockito_version = '1.6.0'
     kluent_version = '1.15'
     robolectric_version = '3.8'
+
+    test_runner_version = '1.0.2'
+    espresso_version = '3.0.2'
 }
 
 dependencies {
@@ -71,8 +74,9 @@ dependencies {
     testImplementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     testImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
 
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    androidTestImplementation "com.android.support.test.espresso:espresso-core:$espresso_version"
+    androidTestImplementation "com.android.support.test:runner:$test_runner_version"
+    androidTestImplementation "com.android.support.test:rules:$test_runner_version"
 
 }
 
