@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.astalos.locationregistry">
+    package="com.astalos.locationregistry">
 
     <application
         android:name=".presentation.RegistryApplication"

@@ -6,7 +6,7 @@ apply plugin: 'kotlin-android-extensions'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.example.astalos.locationregistry"
+        applicationId "com.astalos.locationregistry"
         minSdkVersion 22
         targetSdkVersion 28
         versionCode 1
