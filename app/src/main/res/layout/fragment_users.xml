@@ -6,11 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:text="Users Fragment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/addUserBtn"
         android:layout_width="wrap_content"
@@ -21,5 +16,12 @@
         android:tint="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/usersRecyclerView"
+        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+        android:layout_width="match_parent"
+        tools:listitem="@layout/user_row"
+        android:layout_height="match_parent"/>
 
 </android.support.constraint.ConstraintLayout>

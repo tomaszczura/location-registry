@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="font_h6">20sp</dimen>
+    <dimen name="font_subtitle1">16sp</dimen>
+</resources>
