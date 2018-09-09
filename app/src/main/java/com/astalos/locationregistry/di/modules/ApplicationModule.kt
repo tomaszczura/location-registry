@@ -1,6 +1,8 @@
 package com.astalos.locationregistry.di.modules
 
 import android.content.Context
+import com.astalos.locationregistry.domain.repository.ILocationsRepository
+import com.astalos.locationregistry.domain.repository.IUsersRepository
 import com.astalos.locationregistry.model.memory.MemoryLocationsRepository
 import com.astalos.locationregistry.model.memory.MemoryUsersRepository
 import com.astalos.locationregistry.presentation.RegistryApplication
@@ -20,9 +22,9 @@ class ApplicationModule(private val application: RegistryApplication) {
 
     @Provides
     @Singleton
-    fun providesLocationsRespository(repository: MemoryLocationsRepository) = repository
+    fun providesLocationsRepository(): ILocationsRepository = MemoryLocationsRepository()
 
     @Provides
     @Singleton
-    fun providesUsersRespository(repository: MemoryUsersRepository) = repository
+    fun providesUsersRepository(): IUsersRepository = MemoryUsersRepository()
 }

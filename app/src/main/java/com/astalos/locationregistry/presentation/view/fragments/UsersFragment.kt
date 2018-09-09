@@ -24,7 +24,7 @@ class UsersFragment : BaseFragment() {
     }
 
     private fun initViewModel() {
-        viewModel = ViewModelProviders.of(activity!!).get(UsersViewModel::class.java)
+        viewModel = ViewModelProviders.of(activity!!, viewModelFactory)[UsersViewModel::class.java]
         viewModel.users.observe(this, Observer<List<User>> { showUsers(it) })
         viewModel.error.observe(this, Observer<Failure> { handleError(it) })
     }
