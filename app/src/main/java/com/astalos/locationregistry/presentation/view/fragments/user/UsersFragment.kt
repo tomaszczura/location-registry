@@ -3,6 +3,7 @@ package com.astalos.locationregistry.presentation.view.fragments.user
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import com.astalos.locationregistry.R
 import com.astalos.locationregistry.domain.entities.User
@@ -45,10 +46,10 @@ class UsersFragment : BaseFragment() {
     }
 
     private fun handleError(error: Failure?) {
-
+        Log.d("UsersFragment", "handleError")
     }
 
     private fun showUsers(users: List<User>?) {
-
+        Log.d("UsersFragment", "Show users")
     }
 }

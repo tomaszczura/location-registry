@@ -10,8 +10,13 @@ import com.astalos.locationregistry.domain.repository.Failure
 open class BaseViewModel : ViewModel() {
 
     var error: MutableLiveData<Failure> = MutableLiveData()
+    var saveError: MutableLiveData<Failure> = MutableLiveData()
 
     protected fun handleError(error: Failure) {
         this.error.value = error
+    }
+
+    protected fun handleSaveError(error: Failure) {
+        this.saveError.value = error
     }
 }
