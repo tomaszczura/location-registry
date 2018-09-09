@@ -1,12 +1,16 @@
-package com.astalos.locationregistry.presentation.view.fragments
+package com.astalos.locationregistry.presentation.view.fragments.user
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.view.View
 import com.astalos.locationregistry.R
 import com.astalos.locationregistry.domain.entities.User
 import com.astalos.locationregistry.domain.repository.Failure
+import com.astalos.locationregistry.presentation.view.fragments.BaseFragment
 import com.astalos.locationregistry.presentation.viewmodel.UsersViewModel
+import kotlinx.android.synthetic.main.fragment_users.*
+import org.jetbrains.anko.sdk25.coroutines.onClick
 
 /**
  * @author Tomasz Czura on 9/7/18.
@@ -21,6 +25,17 @@ class UsersFragment : BaseFragment() {
         appComponent.inject(this)
 
         initViewModel()
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        addUserBtn.onClick { showAddUserDialog() }
+    }
+
+    private fun showAddUserDialog () {
+        val addUserFragment = SaveUserDialogFragment.getInstance()
+        addUserFragment.show(fragmentManager, SaveUserDialogFragment::class.java.name)
     }
 
     private fun initViewModel() {

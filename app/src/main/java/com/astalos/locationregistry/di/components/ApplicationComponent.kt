@@ -4,7 +4,7 @@ import com.astalos.locationregistry.di.modules.ApplicationModule
 import com.astalos.locationregistry.di.modules.ViewModelModule
 import com.astalos.locationregistry.presentation.RegistryApplication
 import com.astalos.locationregistry.presentation.view.fragments.LocationsFragment
-import com.astalos.locationregistry.presentation.view.fragments.UsersFragment
+import com.astalos.locationregistry.presentation.view.fragments.user.UsersFragment
 import dagger.Component
 import javax.inject.Singleton
 

@@ -1,6 +1,10 @@
 package com.astalos.locationregistry.domain.entities
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
 /**
  * @author Tomasz Czura on 9/4/18.
  */
-data class User(val id: Int?, val name: String)
+@Parcelize
+data class User(val id: Int?, val name: String) : Parcelable
