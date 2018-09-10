@@ -13,7 +13,6 @@ import kotlinx.android.synthetic.main.dialog_buttons.*
 import kotlinx.android.synthetic.main.fragment_add_user.*
 import org.jetbrains.anko.sdk25.coroutines.onClick
 import org.jetbrains.anko.support.v4.toast
-import javax.inject.Inject
 
 /**
  * @author Tomasz Czura on 9/9/18.
@@ -21,8 +20,7 @@ import javax.inject.Inject
 class SaveUserDialogFragment : BaseDialogFragment() {
     override val layoutId = R.layout.fragment_add_user
 
-    @Inject
-    lateinit var viewModel: UsersViewModel
+    private lateinit var viewModel: UsersViewModel
 
     private var passedUser: User? = null
 
@@ -73,5 +71,4 @@ class SaveUserDialogFragment : BaseDialogFragment() {
     private fun handleError(failure: Failure) {
         toast(R.string.unknown_error).show()
     }
-
 }

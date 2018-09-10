@@ -6,10 +6,15 @@
     <string name="cancel">Cancel</string>
     <string name="user_name">User name</string>
     <string name="user_saved">User saved</string>
+    <string name="location_saved">Location saved</string>
+    <string name="incorrect_location">Incorrect location format</string>
     <string name="user_fetch_error">Can not download users</string>
+    <string name="user_fetch_locations">Can not download locations</string>
     <string name="add_first_user">Add your first user</string>
     <string name="latitude">Latitude</string>
     <string name="longitude">Longitude</string>
+    <string name="lat">Lat: %1$s</string>
+    <string name="lng">Lng: %1$s</string>
 
     <string name="unknown_error">Unknown error</string>
 </resources>

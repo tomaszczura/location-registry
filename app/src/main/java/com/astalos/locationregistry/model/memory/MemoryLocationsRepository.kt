@@ -19,12 +19,4 @@ class MemoryLocationsRepository @Inject constructor(): ILocationsRepository {
         locations.add(addedLocation)
         return OneOf.Success(addedLocation)
     }
-
-    override fun removeLocation(locationId: Int): OneOf<Failure, UserLocation> {
-        val index = locations.indexOfFirst { it.id == locationId }
-        val location = locations[index]
-        locations.removeAt(index)
-        return OneOf.Success(location)
-    }
-
 }

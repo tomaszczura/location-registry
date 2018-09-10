@@ -23,16 +23,4 @@ class MemoryLocationsRepositoryTests {
         locations.size shouldEqual 1
         locations[0] shouldEqual UserLocation(1, 1.0, 1.0, 1L, 1)
     }
-
-    @Test
-    fun `removeLocation should remove location`(){
-        val repository = MemoryLocationsRepository()
-        repository.addLocation(UserLocation(null, 1.0, 1.0, 1L, 1))
-        val result = repository.removeLocation(1)
-        result.isSuccess shouldEqual true
-
-        val listResult = repository.locations(1)
-        val locations = (listResult as OneOf.Success<List<UserLocation>>).data
-        locations.size shouldEqual 0
-    }
 }

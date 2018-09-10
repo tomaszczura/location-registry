@@ -8,5 +8,4 @@ import com.astalos.locationregistry.domain.entities.UserLocation
 interface ILocationsRepository {
     fun locations(userId: Int): OneOf<Failure, List<UserLocation>>
     fun addLocation(location: UserLocation): OneOf<Failure, UserLocation>
-    fun removeLocation(locationId: Int): OneOf<Failure, UserLocation>
 }

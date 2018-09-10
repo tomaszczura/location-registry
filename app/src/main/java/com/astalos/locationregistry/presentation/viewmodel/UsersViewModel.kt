@@ -16,9 +16,11 @@ class UsersViewModel @Inject constructor(private val getUsers: GetUsers,
                                          private val createUser: CreateUser,
                                          private val editUser: EditUser,
                                          private val setActiveUser: SetActiveUser,
-                                         private val removeUser: RemoveUser) : BaseViewModel() {
+                                         private val removeUser: RemoveUser,
+                                         private val getActiveUser: GetActiveUser) : BaseViewModel() {
 
     var users = MutableLiveData<List<User>>()
+    var activeUserId = MutableLiveData<Int>()
 
     fun loadUsers() {
         getUsers.execute(UseCase.NoParams()) { it.oneOf(::handleError, ::handleUsersChange) }
@@ -49,6 +51,14 @@ class UsersViewModel @Inject constructor(private val getUsers: GetUsers,
         setActiveUser.execute(UserIdParams(userId)) { it.oneOf(::handleError, ::handleSetActiveUser) }
     }
 
+    fun getActiveUser() {
+        getActiveUser.execute(UseCase.NoParams()) { it -> it.oneOf({}, ::handleGetActiveUser) }
+    }
+
+    private fun handleGetActiveUser(user: User?) {
+        this.activeUserId.value = user?.id
+    }
+
     private fun handleUsersChange(users: List<User>) {
         this.users.value = users
     }
@@ -68,6 +78,7 @@ class UsersViewModel @Inject constructor(private val getUsers: GetUsers,
     }
 
     private fun handleSetActiveUser(user: User) {
+        this.activeUserId.value = user.id
         this.users.value = this.users.value?.map {
             it.isActive = it.id == user.id
             it

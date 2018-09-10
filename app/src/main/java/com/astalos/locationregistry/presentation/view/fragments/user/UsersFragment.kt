@@ -24,8 +24,7 @@ class UsersFragment : BaseFragment(), UserRowActions {
 
     override val layoutId = R.layout.fragment_users
 
-    @Inject
-    lateinit var usersAdapter: UsersListAdapter
+    @Inject lateinit var usersAdapter: UsersListAdapter
 
     private lateinit var viewModel: UsersViewModel
 
