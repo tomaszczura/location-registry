@@ -23,6 +23,8 @@ class SaveUserDialogFragment : BaseDialogFragment() {
     @Inject
     lateinit var viewModel: UsersViewModel
 
+    private var passedUser: User? = null
+
     companion object {
         private const val USER_ARG = "user_arg"
 
@@ -45,8 +47,10 @@ class SaveUserDialogFragment : BaseDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        passedUser = arguments?.getParcelable(USER_ARG)
         saveBtn.onClick { onSaveClick() }
         cancelBtn.onClick { dismiss() }
+        userName.setText(passedUser?.name ?: "")
     }
 
     private fun initViewModel() {
@@ -55,14 +59,13 @@ class SaveUserDialogFragment : BaseDialogFragment() {
 
     private fun onSaveClick() {
         if (!userName.textValue().isBlank()) {
-            val user = arguments?.getParcelable<User>(USER_ARG)?.copy(name = userName.textValue())
-                    ?: User(name = userName.textValue())
+            val user = passedUser?.copy(name = userName.textValue()) ?: User(name = userName.textValue())
             viewModel.saveUser(user, ::handleUserSave, ::handleError)
         }
     }
 
     private fun handleUserSave(user: User) {
-        toast(R.string.user_created).show()
+        toast(R.string.user_saved).show()
         dismiss()
     }
 

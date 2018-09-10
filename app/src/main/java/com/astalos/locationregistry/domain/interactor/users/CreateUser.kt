@@ -8,12 +8,9 @@ import com.astalos.locationregistry.domain.repository.IUsersRepository
 import com.astalos.locationregistry.domain.repository.OneOf
 import javax.inject.Inject
 
-class SaveUser @Inject constructor(private val repository: IUsersRepository) : UseCase<User, UserParams>() {
-    override suspend fun run(params: UserParams): OneOf<Failure, User> {
-        return if (params.user.id == null) {
-            repository.createUser(params.user)
-        } else {
-            repository.editUser(params.user)
-        }
-    }
+/**
+ * @author Tomasz Czura on 9/10/18.
+ */
+class CreateUser @Inject constructor(private val repository: IUsersRepository) : UseCase<User, UserParams>() {
+    override suspend fun run(params: UserParams): OneOf<Failure, User> = repository.createUser(params.user)
 }

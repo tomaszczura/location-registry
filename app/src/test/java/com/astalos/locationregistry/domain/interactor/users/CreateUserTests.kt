@@ -16,19 +16,19 @@ import org.mockito.junit.MockitoJUnitRunner
  * @author Tomasz Czura on 9/4/18.
  */
 @RunWith(MockitoJUnitRunner::class)
-class SaveUserTests {
+class CreateUserTests {
 
-    private lateinit var editUser: EditUser
+    private lateinit var createUser: CreateUser
 
     @Mock private lateinit var usersRepository: IUsersRepository
 
     @Before fun setUp() {
-        editUser = EditUser(usersRepository)
+        createUser = CreateUser(usersRepository)
     }
 
-    @Test fun `should run usersRepository editUser`() {
-        val user = User(1,"Test User")
-        runBlocking { editUser.run(UserParams(user)) }
-        verify(usersRepository, times(1)).editUser(user)
+    @Test fun `should run usersRepository createUser`() {
+        val user = User(null,"Test User")
+        runBlocking { createUser.run(UserParams(user)) }
+        verify(usersRepository, times(1)).createUser(user)
     }
 }

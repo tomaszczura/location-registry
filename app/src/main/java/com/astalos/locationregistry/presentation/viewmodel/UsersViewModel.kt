@@ -5,9 +5,7 @@ import com.astalos.locationregistry.domain.entities.User
 import com.astalos.locationregistry.domain.interactor.UseCase
 import com.astalos.locationregistry.domain.interactor.UserIdParams
 import com.astalos.locationregistry.domain.interactor.UserParams
-import com.astalos.locationregistry.domain.interactor.users.GetUsers
-import com.astalos.locationregistry.domain.interactor.users.SaveUser
-import com.astalos.locationregistry.domain.interactor.users.SetActiveUser
+import com.astalos.locationregistry.domain.interactor.users.*
 import com.astalos.locationregistry.domain.repository.Failure
 import javax.inject.Inject
 
@@ -15,8 +13,10 @@ import javax.inject.Inject
  * @author Tomasz Czura on 9/7/18.
  */
 class UsersViewModel @Inject constructor(private val getUsers: GetUsers,
-                                         private val saveUser: SaveUser,
-                                         private val setActiveUser: SetActiveUser): BaseViewModel() {
+                                         private val createUser: CreateUser,
+                                         private val editUser: EditUser,
+                                         private val setActiveUser: SetActiveUser,
+                                         private val removeUser: RemoveUser): BaseViewModel() {
 
     var users = MutableLiveData<List<User>>()
 
@@ -25,9 +25,24 @@ class UsersViewModel @Inject constructor(private val getUsers: GetUsers,
     }
 
     fun saveUser(user: User, onSaved: (User) -> Unit, onError: (Failure) -> Unit) {
-        saveUser.execute(UserParams(user)) {
-            it.oneOf(onError) { user -> handleUserSave(user, onSaved) }
+        if (user.id == null) {
+            createUser.execute(UserParams(user)) {
+                it.oneOf(onError) { user -> handleUserCreate(user, onSaved) }
+            }
+        } else {
+            editUser.execute(UserParams(user)) {
+                it.oneOf(onError) { user -> handleUserEdit(user, onSaved) }
+            }
         }
+
+    }
+
+    fun removeUser(userId: Int) {
+        removeUser.execute(UserIdParams(userId)) { it.oneOf(::handleError, ::handleUserRemoved) }
+    }
+
+    private fun handleUserRemoved(user: User?) {
+        this.users.value = this.users.value?.filter { it.id != user?.id }
     }
 
     fun setActiveUser(userId: Int) {
@@ -38,7 +53,14 @@ class UsersViewModel @Inject constructor(private val getUsers: GetUsers,
         this.users.value = users
     }
 
-    private fun handleUserSave(user: User, onSaved: (User) -> Unit) {
+    private fun handleUserEdit(user: User, onSaved: (User) -> Unit) {
+        this.users.value = this.users.value?.map {
+            if(it.id == user.id) user else it
+        }
+        onSaved(user)
+    }
+
+    private fun handleUserCreate(user: User, onSaved: (User) -> Unit) {
         val currentUsers = users.value?.toMutableList() ?: mutableListOf()
         currentUsers.add(0, user)
         this.users.value = currentUsers
@@ -46,10 +68,10 @@ class UsersViewModel @Inject constructor(private val getUsers: GetUsers,
     }
 
     private fun handleSetActiveUser(user: User) {
-        val currentUsers = users.value?.toMutableList() ?: mutableListOf()
-        this.users.value = currentUsers.map {
+        this.users.value = this.users.value?.map {
             it.isActive = it.id == user.id
             it
         }
     }
+
 }

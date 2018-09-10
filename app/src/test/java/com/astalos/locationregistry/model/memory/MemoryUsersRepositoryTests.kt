@@ -51,11 +51,12 @@ class MemoryUsersRepositoryTests {
     fun `removeUser should remove user`() {
         val repository = MemoryUsersRepository()
         repository.createUser(User(id = null, name = "TestUser"))
-        repository.removeUser(1)
+        repository.createUser(User(id = null, name = "TestUser2"))
+        repository.removeUser(2)
         val result = repository.users()
         val users = (result as OneOf.Success<List<User>>)
         result.isSuccess shouldEqual true
-        users.data.size shouldEqual 0
+        users.data.size shouldEqual 1
     }
 
     @Test

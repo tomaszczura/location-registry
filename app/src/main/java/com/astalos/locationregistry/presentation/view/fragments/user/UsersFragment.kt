@@ -23,7 +23,8 @@ class UsersFragment : BaseFragment(), UserRowActions {
 
     override val layoutId = R.layout.fragment_users
 
-    @Inject lateinit var usersAdapter: UsersListAdapter
+    @Inject
+    lateinit var usersAdapter: UsersListAdapter
 
     private lateinit var viewModel: UsersViewModel
 
@@ -37,11 +38,12 @@ class UsersFragment : BaseFragment(), UserRowActions {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewModel.loadUsers()
         addUserBtn.onClick { showAddUserDialog() }
         initUsersList()
     }
 
-    private fun showAddUserDialog () {
+    private fun showAddUserDialog() {
         val addUserFragment = SaveUserDialogFragment.getInstance()
         addUserFragment.show(fragmentManager, SaveUserDialogFragment::class.java.name)
     }
@@ -67,6 +69,15 @@ class UsersFragment : BaseFragment(), UserRowActions {
 
     override fun onSetActiveClick(userId: Int) {
         viewModel.setActiveUser(userId)
+    }
+
+    override fun onEditClick(user: User) {
+        val addUserFragment = SaveUserDialogFragment.getInstance(user)
+        addUserFragment.show(fragmentManager, SaveUserDialogFragment::class.java.name)
+    }
+
+    override fun onRemoveClick(userId: Int) {
+        viewModel.removeUser(userId)
     }
 
 }

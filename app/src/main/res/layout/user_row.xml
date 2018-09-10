@@ -30,11 +30,15 @@
 
     <ImageButton
         android:id="@+id/editUserBtn"
-        style="?android:attr/borderlessButtonStyle"
-        android:layout_width="48dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
+        style="@style/ListRowButton"
         android:src="@drawable/ic_edit"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toStartOf="@+id/removeUserBtn"/>
+
+    <ImageButton
+        android:id="@+id/removeUserBtn"
+        style="@style/ListRowButton"
+        android:src="@drawable/ic_delete"
         app:layout_constraintEnd_toEndOf="parent"/>
 
 

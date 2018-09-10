@@ -12,3 +12,19 @@ import android.widget.EditText
 fun EditText.textValue() = this.text.toString()
 
 fun ViewGroup.inflate(@LayoutRes layoutId: Int): View = LayoutInflater.from(context).inflate(layoutId, this, false)
+
+fun View.show() {
+    this.visibility = View.VISIBLE
+}
+
+fun View.gone() {
+    this.visibility = View.GONE
+}
+
+fun View.setVisible(isVisible: Boolean) {
+    if (isVisible) {
+        show()
+    } else {
+        gone()
+    }
+}
