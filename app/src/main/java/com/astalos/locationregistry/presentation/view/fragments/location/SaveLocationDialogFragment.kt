@@ -26,10 +26,10 @@ class SaveLocationDialogFragment : BaseDialogFragment() {
     companion object {
         private const val USER_ID_ARG = "user_id_arg"
 
-        fun getInstance() : SaveLocationDialogFragment {
+        fun getInstance(userId: Int) : SaveLocationDialogFragment {
             val fragment = SaveLocationDialogFragment()
             val arguments = Bundle()
-            arguments.putInt(USER_ID_ARG, 0)
+            arguments.putInt(USER_ID_ARG, userId)
             fragment.arguments = arguments
             return fragment
         }

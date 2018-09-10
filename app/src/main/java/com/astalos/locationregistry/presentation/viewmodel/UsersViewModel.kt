@@ -68,6 +68,9 @@ class UsersViewModel @Inject constructor(private val getUsers: GetUsers,
             if (it.id == user.id) user else it
         }
         onSaved(user)
+        if (user.isActive) {
+            this.activeUserId.value = user.id
+        }
     }
 
     private fun handleUserCreate(user: User, onSaved: (User) -> Unit) {
@@ -75,6 +78,9 @@ class UsersViewModel @Inject constructor(private val getUsers: GetUsers,
         currentUsers.add(0, user)
         this.users.value = currentUsers
         onSaved(user)
+        if (user.isActive) {
+            this.activeUserId.value = user.id
+        }
     }
 
     private fun handleSetActiveUser(user: User) {

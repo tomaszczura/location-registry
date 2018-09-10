@@ -30,6 +30,7 @@ class MemoryUsersRepository : IUsersRepository {
         val addedUser = user.copy(id = users.size + 1)
         if (users.isEmpty()){
             addedUser.isActive = true
+            activeUserId = addedUser.id!!
         }
         users[addedUser.id!!] = addedUser
         return OneOf.Success(addedUser)

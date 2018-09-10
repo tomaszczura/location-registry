@@ -40,10 +40,19 @@ class LocationsFragment : BaseFragment() {
         initLocationsList()
         initLocationsViewModel()
         initUsersViewModel()
+
+        usersViewModel.getActiveUser()
     }
 
     private fun initLocationsList() {
         locationsRecyclerView.adapter = locationsAdapter
+    }
+
+    override fun onHiddenChanged(hidden: Boolean) {
+        super.onHiddenChanged(hidden)
+        if (!hidden) {
+            usersViewModel.getActiveUser()
+        }
     }
 
     private fun initUsersViewModel() {
@@ -68,8 +77,10 @@ class LocationsFragment : BaseFragment() {
     }
 
     private fun showAddLocationDialog() {
-        val dialog = SaveLocationDialogFragment.getInstance()
-        dialog.show(fragmentManager, SaveLocationDialogFragment::class.java.name)
+        usersViewModel.activeUserId.value?.let {
+            val dialog = SaveLocationDialogFragment.getInstance(it)
+            dialog.show(fragmentManager, SaveLocationDialogFragment::class.java.name)
+        }
     }
 
     private fun handleError(error: Failure?) {
