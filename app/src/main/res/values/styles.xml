@@ -38,7 +38,11 @@
         <item name="android:layout_marginBottom">12dp</item>
         <item name="android:layout_marginEnd">12dp</item>
         <item name="android:tint">@android:color/white</item>
+    </style>
 
+    <style name="FlatButton" parent="Base.Widget.AppCompat.Button.Borderless">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
     </style>
 
 </resources>

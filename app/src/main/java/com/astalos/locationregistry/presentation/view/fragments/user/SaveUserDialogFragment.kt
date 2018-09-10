@@ -9,6 +9,7 @@ import com.astalos.locationregistry.domain.repository.Failure
 import com.astalos.locationregistry.presentation.extensions.textValue
 import com.astalos.locationregistry.presentation.view.fragments.BaseDialogFragment
 import com.astalos.locationregistry.presentation.viewmodel.UsersViewModel
+import kotlinx.android.synthetic.main.dialog_buttons.*
 import kotlinx.android.synthetic.main.fragment_add_user.*
 import org.jetbrains.anko.sdk25.coroutines.onClick
 import org.jetbrains.anko.support.v4.toast
