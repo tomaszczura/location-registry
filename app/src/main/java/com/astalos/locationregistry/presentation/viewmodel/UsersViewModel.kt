@@ -16,12 +16,12 @@ class UsersViewModel @Inject constructor(private val getUsers: GetUsers,
                                          private val createUser: CreateUser,
                                          private val editUser: EditUser,
                                          private val setActiveUser: SetActiveUser,
-                                         private val removeUser: RemoveUser): BaseViewModel() {
+                                         private val removeUser: RemoveUser) : BaseViewModel() {
 
     var users = MutableLiveData<List<User>>()
 
     fun loadUsers() {
-        getUsers.execute(UseCase.NoParams()) { it.oneOf( ::handleError, ::handleUsersChange) }
+        getUsers.execute(UseCase.NoParams()) { it.oneOf(::handleError, ::handleUsersChange) }
     }
 
     fun saveUser(user: User, onSaved: (User) -> Unit, onError: (Failure) -> Unit) {
@@ -55,7 +55,7 @@ class UsersViewModel @Inject constructor(private val getUsers: GetUsers,
 
     private fun handleUserEdit(user: User, onSaved: (User) -> Unit) {
         this.users.value = this.users.value?.map {
-            if(it.id == user.id) user else it
+            if (it.id == user.id) user else it
         }
         onSaved(user)
     }

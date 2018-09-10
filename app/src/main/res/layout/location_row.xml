@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:padding="8dp">
+
+    <TextView
+        android:id="@+id/latitude"
+        style="@style/TextView.Subtitle1"
+        android:textColor="@android:color/black"
+        tools:text="Lat: 10.23" />
+
+    <TextView
+        style="@style/TextView.Subtitle1"
+        android:id="@+id/longitude"
+        android:layout_marginTop="8dp"
+        android:textColor="@android:color/black"
+        app:layout_constraintTop_toBottomOf="@+id/latitude"
+        tools:text="Lng: 10.23" />
+
+    <TextView
+        android:id="@+id/locationDate"
+        style="@style/TextView.Caption"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/longitude"
+        tools:text="16-07-2018 18:17" />
+
+</android.support.constraint.ConstraintLayout>

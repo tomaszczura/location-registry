@@ -12,4 +12,33 @@
         <item name="android:tint">@color/gray600</item>
     </style>
 
+    <style name="TextView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="TextView.Subtitle2">
+        <item name="android:textSize">@dimen/font_subtitle1</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+
+    <style name="TextView.Subtitle1">
+        <item name="android:textSize">@dimen/font_subtitle1</item>
+        <item name="android:fontFamily">sans-serif-regular</item>
+    </style>
+
+    <style name="TextView.Caption">
+        <item name="android:textSize">@dimen/font_caption</item>
+        <item name="android:fontFamily">sans-serif-regular</item>
+    </style>
+
+    <style name="FloatingButton">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginBottom">12dp</item>
+        <item name="android:layout_marginEnd">12dp</item>
+        <item name="android:tint">@android:color/white</item>
+
+    </style>
+
 </resources>

@@ -6,6 +6,8 @@
     <string name="cancel">Cancel</string>
     <string name="user_name">User name</string>
     <string name="user_saved">User saved</string>
+    <string name="user_fetch_error">Can not download users</string>
+    <string name="add_first_user">Add your first user</string>
 
     <string name="unknown_error">Unknown error</string>
 </resources>

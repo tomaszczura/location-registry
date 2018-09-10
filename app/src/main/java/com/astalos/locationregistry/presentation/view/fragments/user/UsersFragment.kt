@@ -3,17 +3,18 @@ package com.astalos.locationregistry.presentation.view.fragments.user
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import com.astalos.locationregistry.R
 import com.astalos.locationregistry.domain.entities.User
 import com.astalos.locationregistry.domain.repository.Failure
 import com.astalos.locationregistry.presentation.adapter.UserRowActions
 import com.astalos.locationregistry.presentation.adapter.UsersListAdapter
+import com.astalos.locationregistry.presentation.extensions.setVisible
 import com.astalos.locationregistry.presentation.view.fragments.BaseFragment
 import com.astalos.locationregistry.presentation.viewmodel.UsersViewModel
 import kotlinx.android.synthetic.main.fragment_users.*
 import org.jetbrains.anko.sdk25.coroutines.onClick
+import org.jetbrains.anko.support.v4.toast
 import javax.inject.Inject
 
 /**
@@ -60,10 +61,11 @@ class UsersFragment : BaseFragment(), UserRowActions {
     }
 
     private fun handleError(error: Failure?) {
-        Log.d("UsersFragment", "handleError")
+        toast(R.string.user_fetch_error).show()
     }
 
     private fun showUsers(users: List<User>) {
+        addFirstUserText.setVisible(users.isEmpty())
         usersAdapter.users = users
     }
 

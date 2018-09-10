@@ -8,14 +8,10 @@
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/addUserBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"
-        android:layout_marginEnd="12dp"
+        style="@style/FloatingButton"
         android:src="@drawable/ic_add_user"
-        android:tint="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/usersRecyclerView"
@@ -23,5 +19,14 @@
         android:layout_width="match_parent"
         tools:listitem="@layout/user_row"
         android:layout_height="match_parent"/>
+
+    <TextView
+        android:id="@+id/addFirstUserText"
+        style="@style/TextView.Subtitle1"
+        android:layout_marginTop="60dp"
+        android:text="@string/add_first_user"
+        app:layout_constraintEnd_toEndOf="@+id/usersRecyclerView"
+        app:layout_constraintStart_toStartOf="@+id/usersRecyclerView"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

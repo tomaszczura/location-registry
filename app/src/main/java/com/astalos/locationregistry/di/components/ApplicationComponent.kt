@@ -3,6 +3,7 @@ package com.astalos.locationregistry.di.components
 import com.astalos.locationregistry.di.modules.ApplicationModule
 import com.astalos.locationregistry.di.modules.ViewModelModule
 import com.astalos.locationregistry.presentation.RegistryApplication
+import com.astalos.locationregistry.presentation.view.MainActivity
 import com.astalos.locationregistry.presentation.view.fragments.LocationsFragment
 import com.astalos.locationregistry.presentation.view.fragments.user.SaveUserDialogFragment
 import com.astalos.locationregistry.presentation.view.fragments.user.UsersFragment
@@ -19,4 +20,5 @@ interface ApplicationComponent {
     fun inject(application: UsersFragment)
     fun inject(locationsFragment: LocationsFragment)
     fun inject(saveUserDialogFragment: SaveUserDialogFragment)
+    fun inject(mainActivity: MainActivity)
 }

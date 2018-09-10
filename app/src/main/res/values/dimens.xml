@@ -2,4 +2,7 @@
 <resources>
     <dimen name="font_h6">20sp</dimen>
     <dimen name="font_subtitle1">16sp</dimen>
+    <dimen name="font_subtitle2">14sp</dimen>
+    <dimen name="font_caption">12sp</dimen>
+    <dimen name="font_body1">16sp</dimen>
 </resources>
