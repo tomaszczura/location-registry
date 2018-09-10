@@ -15,6 +15,10 @@ class MemoryUsersRepository : IUsersRepository {
 
     override fun setActiveUser(userId: Int): OneOf<Failure, User> {
         return if (users[userId] != null) {
+            users.map {
+                it.value.isActive = it.value.id == userId
+                it
+            }
             activeUserId = userId
             OneOf.Success(users[activeUserId]!!)
         } else {
@@ -24,13 +28,20 @@ class MemoryUsersRepository : IUsersRepository {
 
     override fun createUser(user: User): OneOf<Failure, User> {
         val addedUser = user.copy(id = users.size + 1)
+        if (users.isEmpty()){
+            addedUser.isActive = true
+        }
         users[addedUser.id!!] = addedUser
         return OneOf.Success(addedUser)
     }
 
     override fun removeUser(userId: Int): OneOf<Failure, User?> {
-        val user = users.remove(userId)
-        return OneOf.Success(user)
+        return if (users[userId]?.isActive == true) {
+            OneOf.Error(Failure.ActiveUserRemove())
+        } else {
+            val user = users.remove(userId)
+            OneOf.Success(user)
+        }
     }
 
     override fun editUser(user: User): OneOf<Failure, User> {

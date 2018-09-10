@@ -28,6 +28,26 @@ class MemoryUsersRepositoryTests {
     }
 
     @Test
+    fun `createUser should set user as active if first user`() {
+        val repository = MemoryUsersRepository()
+        repository.createUser(User(id = null, name = "TestUser"))
+        val result = repository.users()
+        val users = (result as OneOf.Success<List<User>>)
+        users.data[0].isActive shouldEqual true
+    }
+
+    @Test
+    fun `createUser should not set user as active if already any users`() {
+        val repository = MemoryUsersRepository()
+        repository.createUser(User(id = null, name = "TestUser"))
+        repository.createUser(User(id = null, name = "TestUser2"))
+        val result = repository.users()
+        val users = (result as OneOf.Success<List<User>>)
+        users.data[0].isActive shouldEqual true
+        users.data[1].isActive shouldEqual false
+    }
+
+    @Test
     fun `removeUser should remove user`() {
         val repository = MemoryUsersRepository()
         repository.createUser(User(id = null, name = "TestUser"))
@@ -42,12 +62,12 @@ class MemoryUsersRepositoryTests {
     fun `setActiveUser should set active user`() {
         val repository = MemoryUsersRepository()
         repository.createUser(User(id = null, name = "TestUser"))
-        repository.setActiveUser(1)
-        val result = repository.getActiveUser()
+        val result = repository.setActiveUser(1)
         val user = (result as OneOf.Success<User>).data
 
         result.isSuccess shouldEqual true
         user.id!! shouldEqual 1
+        user.isActive shouldEqual true
     }
 
     @Test

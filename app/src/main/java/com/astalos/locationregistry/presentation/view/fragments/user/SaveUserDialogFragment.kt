@@ -20,7 +20,8 @@ import javax.inject.Inject
 class SaveUserDialogFragment : BaseDialogFragment() {
     override val layoutId = R.layout.fragment_add_user
 
-    @Inject lateinit var viewModel: UsersViewModel
+    @Inject
+    lateinit var viewModel: UsersViewModel
 
     companion object {
         private const val USER_ARG = "user_arg"
@@ -53,8 +54,11 @@ class SaveUserDialogFragment : BaseDialogFragment() {
     }
 
     private fun onSaveClick() {
-        val user = arguments?.getParcelable<User>(USER_ARG)?.copy(name = userName.textValue()) ?: User(name = userName.textValue())
-        viewModel.saveUser(user, ::handleUserSave , ::handleError)
+        if (!userName.textValue().isBlank()) {
+            val user = arguments?.getParcelable<User>(USER_ARG)?.copy(name = userName.textValue())
+                    ?: User(name = userName.textValue())
+            viewModel.saveUser(user, ::handleUserSave, ::handleError)
+        }
     }
 
     private fun handleUserSave(user: User) {

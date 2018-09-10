@@ -8,6 +8,7 @@ import android.view.View
 import com.astalos.locationregistry.R
 import com.astalos.locationregistry.domain.entities.User
 import com.astalos.locationregistry.domain.repository.Failure
+import com.astalos.locationregistry.presentation.adapter.UserRowActions
 import com.astalos.locationregistry.presentation.adapter.UsersListAdapter
 import com.astalos.locationregistry.presentation.view.fragments.BaseFragment
 import com.astalos.locationregistry.presentation.viewmodel.UsersViewModel
@@ -18,7 +19,8 @@ import javax.inject.Inject
 /**
  * @author Tomasz Czura on 9/7/18.
  */
-class UsersFragment : BaseFragment() {
+class UsersFragment : BaseFragment(), UserRowActions {
+
     override val layoutId = R.layout.fragment_users
 
     @Inject lateinit var usersAdapter: UsersListAdapter
@@ -45,6 +47,7 @@ class UsersFragment : BaseFragment() {
     }
 
     private fun initUsersList() {
+        usersAdapter.userActions = this
         usersRecyclerView.adapter = usersAdapter
     }
 
@@ -61,4 +64,9 @@ class UsersFragment : BaseFragment() {
     private fun showUsers(users: List<User>) {
         usersAdapter.users = users
     }
+
+    override fun onSetActiveClick(userId: Int) {
+        viewModel.setActiveUser(userId)
+    }
+
 }
