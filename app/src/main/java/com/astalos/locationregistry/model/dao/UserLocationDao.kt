@@ -11,8 +11,11 @@ import com.astalos.locationregistry.model.entity.UserLocationEntity
  */
 @Dao
 interface UserLocationDao {
+    @Query("SELECT * FROM UserLocationEntity")
+    fun getAll(): List<UserLocationEntity>
+
     @Query("SELECT * FROM UserLocationEntity where userId = :userId")
-    fun getAll(userId: Long): List<UserLocationEntity>
+    fun getAllForUser(userId: Long): List<UserLocationEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun saveLocation(location: UserLocationEntity): Long

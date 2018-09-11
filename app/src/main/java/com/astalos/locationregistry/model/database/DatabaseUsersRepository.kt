@@ -25,7 +25,7 @@ class DatabaseUsersRepository @Inject constructor(private val context: Context) 
         if (users.isEmpty()) {
             user.isActive = true
         }
-        val userId = database.userDao.saveUser(user.toEntity())
+        val userId = database.userDao.createUser(user.toEntity())
         user.id = userId.toInt()
         return OneOf.Success(user)
     }
@@ -37,7 +37,7 @@ class DatabaseUsersRepository @Inject constructor(private val context: Context) 
     }
 
     override fun editUser(user: User): OneOf<Failure, User> {
-        database.userDao.saveUser(user.toEntity())
+        database.userDao.updateUser(user.toEntity())
         return OneOf.Success(user)
     }
 

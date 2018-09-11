@@ -1,11 +1,10 @@
 package com.astalos.locationregistry.model.dao
 
-import android.arch.persistence.room.Dao
-import android.arch.persistence.room.Insert
+import android.arch.persistence.room.*
 import android.arch.persistence.room.OnConflictStrategy.REPLACE
-import android.arch.persistence.room.Query
-import android.arch.persistence.room.Transaction
 import com.astalos.locationregistry.model.entity.UserEntity
+
+
 
 /**
  * @author Tomasz Czura on 9/10/18.
@@ -20,7 +19,10 @@ abstract class UserDao {
     abstract fun getUserWithId(userId: Long): UserEntity?
 
     @Insert(onConflict = REPLACE)
-    abstract fun saveUser(user: UserEntity) : Long
+    abstract fun createUser(user: UserEntity) : Long
+
+    @Update
+    abstract fun updateUser(user: UserEntity)
 
     @Query("DELETE FROM UserEntity WHERE id = :userId")
     abstract fun deleteUser(userId: Long)
@@ -36,7 +38,7 @@ abstract class UserDao {
         val activeUser = getActiveUser()
         if (activeUser != null) {
             activeUser.isActive = false
-            saveUser(activeUser)
+            updateUser(activeUser)
         }
         saveActiveUser(userId)
         return getUserWithId(userId)!!

@@ -36,7 +36,7 @@ class UserDaoTests {
     @Test
     fun should_save_user() {
         val user = UserEntity(null, "TestName", true)
-        userDao.saveUser(user)
+        userDao.createUser(user)
         val users = userDao.getAll()
         Assert.assertEquals(users.size, 1)
         Assert.assertEquals(users[0].name, "TestName")
@@ -45,9 +45,9 @@ class UserDaoTests {
     @Test
     fun should_save_user_edition() {
         val user = UserEntity(1, "TestName", true)
-        userDao.saveUser(user)
+        userDao.createUser(user)
         user.name = "TestName2"
-        userDao.saveUser(user)
+        userDao.updateUser(user)
         val savedUser = userDao.getUserWithId(1L)
         Assert.assertEquals(savedUser!!.name, "TestName2")
     }
@@ -55,7 +55,7 @@ class UserDaoTests {
     @Test
     fun should_set_active_user() {
         val user1 = UserEntity(1, "TestName1", false)
-        userDao.saveUser(user1)
+        userDao.createUser(user1)
         userDao.setActiveUser(1)
         val activeUser = userDao.getActiveUser()
         Assert.assertEquals(activeUser!!.id, 1L)
@@ -65,8 +65,8 @@ class UserDaoTests {
     fun should_change_active_user() {
         val user1 = UserEntity(1, "TestName1", true)
         val user2 = UserEntity(2, "TestName2", false)
-        userDao.saveUser(user1)
-        userDao.saveUser(user2)
+        userDao.createUser(user1)
+        userDao.createUser(user2)
 
         userDao.setActiveUser(user2.id!!)
         val activeUser = userDao.getActiveUser()
@@ -79,7 +79,7 @@ class UserDaoTests {
     @Test
     fun should_remove_user() {
         val user1 = UserEntity(1, "TestName1", true)
-        userDao.saveUser(user1)
+        userDao.createUser(user1)
         userDao.deleteUser(1)
         val user = userDao.getUserWithId(1)
         Assert.assertNull(user)

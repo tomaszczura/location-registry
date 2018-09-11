@@ -19,7 +19,6 @@ import java.io.IOException
 @RunWith(AndroidJUnit4::class)
 class UserLocationDaoTests {
     private lateinit var userLocationDao: UserLocationDao
-    private lateinit var userDao: UserDao
     private lateinit var database: AppDatabase
 
     @Before
@@ -29,7 +28,7 @@ class UserLocationDaoTests {
         userLocationDao = database.userLocationDao
 
         val user = UserEntity(1, "testUser")
-        database.userDao.saveUser(user)
+        database.userDao.createUser(user)
     }
 
     @After
@@ -42,7 +41,7 @@ class UserLocationDaoTests {
     fun should_save_location() {
         val location = UserLocationEntity(null, 1.0, 2.0, 1, 1)
         userLocationDao.saveLocation(location)
-        val locations = userLocationDao.getAll(1)
+        val locations = userLocationDao.getAllForUser(1)
         Assert.assertEquals(locations.size, 1)
     }
 }

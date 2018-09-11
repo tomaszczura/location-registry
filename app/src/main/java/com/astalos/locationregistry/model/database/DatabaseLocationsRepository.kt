@@ -12,11 +12,11 @@ import javax.inject.Inject
 /**
  * @author Tomasz Czura on 9/11/18.
  */
-class DatabaseLocationRepository @Inject constructor(private val context: Context) : ILocationsRepository {
+class DatabaseLocationsRepository @Inject constructor(private val context: Context) : ILocationsRepository {
     private val database by lazy { AppDatabase.getInstance(context) }
 
     override fun locations(userId: Int): OneOf<Failure, List<UserLocation>> =
-            OneOf.Success(database.userLocationDao.getAll(userId.toLong()).map { it.toUserLocation() })
+            OneOf.Success(database.userLocationDao.getAllForUser(userId.toLong()).map { it.toUserLocation() })
 
     override fun addLocation(location: UserLocation): OneOf<Failure, UserLocation> {
         val locationId = database.userLocationDao.saveLocation(location.toEntity())

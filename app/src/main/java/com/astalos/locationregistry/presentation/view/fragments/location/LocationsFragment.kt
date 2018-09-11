@@ -28,6 +28,8 @@ class LocationsFragment : BaseFragment() {
     private lateinit var usersViewModel: UsersViewModel
     private lateinit var locationsViewModel: LocationsViewModel
 
+    private var activeUserId: Int = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         appComponent.inject(this)
@@ -72,7 +74,10 @@ class LocationsFragment : BaseFragment() {
 
     private fun handleActiveUserChange(userId: Int?) {
         userId?.let {
-            locationsViewModel.loadLocations(it)
+            if (activeUserId != it) {
+                activeUserId = it
+                locationsViewModel.loadLocations(it)
+            }
         }
     }
 

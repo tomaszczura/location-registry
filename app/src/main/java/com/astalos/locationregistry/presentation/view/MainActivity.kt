@@ -55,16 +55,21 @@ class MainActivity : AppCompatActivity() {
         if (list.isEmpty()) {
             showUsersFragment()
             bottomNavigationView.selectedItemId = R.id.users_list
-            viewModel.users.removeObservers(this)
-            viewModel.error.removeObservers(this)
         } else {
             showLocationsFragment()
             bottomNavigationView.selectedItemId = R.id.locations_list
         }
+        unsubscribeFromViewModel()
+    }
+
+    private fun unsubscribeFromViewModel() {
+        viewModel.users.removeObservers(this)
+        viewModel.error.removeObservers(this)
     }
 
     private fun handleError(it: Failure?) {
         toast(R.string.user_fetch_error).show()
+        unsubscribeFromViewModel()
     }
 
     private fun initNavigation() {
