@@ -15,5 +15,5 @@ interface UserLocationDao {
     fun getAll(userId: Long): List<UserLocationEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun saveLocation(location: UserLocationEntity)
+    fun saveLocation(location: UserLocationEntity): Long
 }
