@@ -7,7 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import com.astalos.locationregistry.domain.entities.SimpleLocation
 import com.astalos.locationregistry.domain.repository.Failure
-import com.astalos.locationregistry.domain.repository.OneOf
+import com.astalos.locationregistry.domain.interactor.OneOf
 import kotlin.coroutines.experimental.Continuation
 
 /**

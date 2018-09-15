@@ -2,7 +2,7 @@ package com.astalos.locationregistry.model.memory
 
 import com.astalos.locationregistry.domain.entities.User
 import com.astalos.locationregistry.domain.repository.Failure
-import com.astalos.locationregistry.domain.repository.OneOf
+import com.astalos.locationregistry.domain.interactor.OneOf
 import org.amshove.kluent.shouldBeInstanceOf
 import org.amshove.kluent.shouldBeNull
 import org.amshove.kluent.shouldEqual

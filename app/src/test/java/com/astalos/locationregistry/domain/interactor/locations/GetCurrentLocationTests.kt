@@ -3,7 +3,7 @@ package com.astalos.locationregistry.domain.interactor.locations
 import com.astalos.locationregistry.domain.entities.SimpleLocation
 import com.astalos.locationregistry.domain.interactor.UseCase
 import com.astalos.locationregistry.domain.repository.ILocationsRepository
-import com.astalos.locationregistry.domain.repository.OneOf
+import com.astalos.locationregistry.domain.interactor.OneOf
 import com.nhaarman.mockito_kotlin.given
 import com.nhaarman.mockito_kotlin.times
 import com.nhaarman.mockito_kotlin.verify

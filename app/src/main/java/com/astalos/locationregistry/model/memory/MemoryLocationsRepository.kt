@@ -4,7 +4,7 @@ import com.astalos.locationregistry.domain.entities.SimpleLocation
 import com.astalos.locationregistry.domain.entities.UserLocation
 import com.astalos.locationregistry.domain.repository.Failure
 import com.astalos.locationregistry.domain.repository.ILocationsRepository
-import com.astalos.locationregistry.domain.repository.OneOf
+import com.astalos.locationregistry.domain.interactor.OneOf
 import javax.inject.Inject
 
 /**

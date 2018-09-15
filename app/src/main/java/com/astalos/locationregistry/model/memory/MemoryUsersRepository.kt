@@ -3,7 +3,7 @@ package com.astalos.locationregistry.model.memory
 import com.astalos.locationregistry.domain.entities.User
 import com.astalos.locationregistry.domain.repository.Failure
 import com.astalos.locationregistry.domain.repository.IUsersRepository
-import com.astalos.locationregistry.domain.repository.OneOf
+import com.astalos.locationregistry.domain.interactor.OneOf
 
 /**
  * @author Tomasz Czura on 9/4/18.

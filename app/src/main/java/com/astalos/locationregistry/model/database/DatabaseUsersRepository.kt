@@ -4,7 +4,7 @@ import android.content.Context
 import com.astalos.locationregistry.domain.entities.User
 import com.astalos.locationregistry.domain.repository.Failure
 import com.astalos.locationregistry.domain.repository.IUsersRepository
-import com.astalos.locationregistry.domain.repository.OneOf
+import com.astalos.locationregistry.domain.interactor.OneOf
 import com.astalos.locationregistry.model.entity.toEntity
 import com.astalos.locationregistry.model.entity.toUser
 import javax.inject.Inject

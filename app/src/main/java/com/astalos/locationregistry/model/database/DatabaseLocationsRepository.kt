@@ -5,7 +5,7 @@ import com.astalos.locationregistry.domain.entities.SimpleLocation
 import com.astalos.locationregistry.domain.entities.UserLocation
 import com.astalos.locationregistry.domain.repository.Failure
 import com.astalos.locationregistry.domain.repository.ILocationsRepository
-import com.astalos.locationregistry.domain.repository.OneOf
+import com.astalos.locationregistry.domain.interactor.OneOf
 import com.astalos.locationregistry.model.entity.toEntity
 import com.astalos.locationregistry.model.entity.toUserLocation
 import com.astalos.locationregistry.model.external.gpsLocationProvider.GPSLocationProvider

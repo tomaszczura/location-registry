@@ -1,7 +1,7 @@
 package com.astalos.locationregistry.model.external.gpsLocationProvider
 
 import com.astalos.locationregistry.domain.repository.Failure
-import com.astalos.locationregistry.domain.repository.OneOf
+import com.astalos.locationregistry.domain.interactor.OneOf
 import com.karumi.dexter.listener.PermissionDeniedResponse
 import com.karumi.dexter.listener.PermissionGrantedResponse
 import com.karumi.dexter.listener.single.BasePermissionListener

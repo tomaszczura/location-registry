@@ -1,7 +1,7 @@
 package com.astalos.locationregistry.model.memory
 
 import com.astalos.locationregistry.domain.entities.UserLocation
-import com.astalos.locationregistry.domain.repository.OneOf
+import com.astalos.locationregistry.domain.interactor.OneOf
 import org.amshove.kluent.shouldEqual
 import org.junit.Test
 import org.junit.runner.RunWith

@@ -2,6 +2,7 @@ package com.astalos.locationregistry.domain.repository
 
 import com.astalos.locationregistry.domain.entities.SimpleLocation
 import com.astalos.locationregistry.domain.entities.UserLocation
+import com.astalos.locationregistry.domain.interactor.OneOf
 
 /**
  * @author Tomasz Czura on 9/4/18.

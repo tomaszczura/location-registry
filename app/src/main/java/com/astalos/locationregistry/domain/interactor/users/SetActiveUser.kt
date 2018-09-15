@@ -5,7 +5,7 @@ import com.astalos.locationregistry.domain.interactor.UseCase
 import com.astalos.locationregistry.domain.interactor.UserIdParams
 import com.astalos.locationregistry.domain.repository.Failure
 import com.astalos.locationregistry.domain.repository.IUsersRepository
-import com.astalos.locationregistry.domain.repository.OneOf
+import com.astalos.locationregistry.domain.interactor.OneOf
 import javax.inject.Inject
 
 class SetActiveUser @Inject constructor(private val repository: IUsersRepository) : UseCase<User, UserIdParams>() {

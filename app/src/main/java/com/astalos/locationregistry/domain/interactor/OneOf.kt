@@ -1,4 +1,4 @@
-package com.astalos.locationregistry.domain.repository
+package com.astalos.locationregistry.domain.interactor
 
 /**
  * @author Tomasz Czura on 9/4/18.
