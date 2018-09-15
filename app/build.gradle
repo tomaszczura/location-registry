@@ -43,6 +43,8 @@ ext {
 
     test_runner_version = '1.0.2'
     espresso_version = '3.0.2'
+    dexter_version = '5.0.0'
+    canary_version = '1.6.1'
 }
 
 dependencies {
@@ -71,6 +73,7 @@ dependencies {
     implementation "com.android.support:design:$app_compat_version"
     implementation "com.android.support.constraint:constraint-layout:$constraint_layout_version"
     implementation "com.android.support:support-annotations:$app_compat_version"
+    implementation "com.karumi:dexter:$dexter_version"
 
 
     testImplementation 'junit:junit:4.12'
@@ -84,6 +87,10 @@ dependencies {
     androidTestImplementation "com.android.support.test.espresso:espresso-core:$espresso_version"
     androidTestImplementation "com.android.support.test:runner:$test_runner_version"
     androidTestImplementation "com.android.support.test:rules:$test_runner_version"
+
+    debugImplementation "com.squareup.leakcanary:leakcanary-android:$canary_version"
+    releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$canary_version"
+    debugImplementation "com.squareup.leakcanary:leakcanary-support-fragment:$canary_version"
 
 }
 

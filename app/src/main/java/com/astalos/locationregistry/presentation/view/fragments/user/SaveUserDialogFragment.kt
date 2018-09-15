@@ -6,6 +6,7 @@ import android.view.View
 import com.astalos.locationregistry.R
 import com.astalos.locationregistry.domain.entities.User
 import com.astalos.locationregistry.domain.repository.Failure
+import com.astalos.locationregistry.presentation.ErrorResolver
 import com.astalos.locationregistry.presentation.extensions.textValue
 import com.astalos.locationregistry.presentation.view.fragments.BaseDialogFragment
 import com.astalos.locationregistry.presentation.viewmodel.UsersViewModel
@@ -39,7 +40,7 @@ class SaveUserDialogFragment : BaseDialogFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        appComponent.inject(this)
+        activityComponent.inject(this)
         initViewModel()
     }
 
@@ -69,6 +70,6 @@ class SaveUserDialogFragment : BaseDialogFragment() {
     }
 
     private fun handleError(failure: Failure) {
-        toast(R.string.unknown_error).show()
+        toast(ErrorResolver.getErrorResId(failure)).show()
     }
 }

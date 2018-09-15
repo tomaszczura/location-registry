@@ -1,32 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
+    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:minWidth="300dp"
     android:padding="8dp">
 
     <EditText
         android:id="@+id/latitude"
-        android:layout_width="match_parent"
-        android:layout_marginTop="8dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:hint="@string/latitude"
         android:inputType="numberDecimal"
-        android:hint="@string/latitude" />
+        app:layout_constraintEnd_toStartOf="@+id/buttonContainer"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/longitude"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:hint="@string/longitude"
         android:inputType="numberDecimal"
-        android:hint="@string/longitude" />
+        app:layout_constraintEnd_toEndOf="@+id/latitude"
+        app:layout_constraintStart_toStartOf="@+id/latitude"
+        app:layout_constraintTop_toBottomOf="@+id/latitude" />
 
     <include
+        android:id="@+id/include"
         layout="@layout/dialog_buttons"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/longitude" />
 
-</LinearLayout>
+    <FrameLayout
+        android:id="@+id/buttonContainer"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        app:layout_constraintBottom_toTopOf="@+id/include"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" >
+
+        <ImageButton
+            android:id="@+id/getLocationBtn"
+            style="@style/ListRowButton"
+            android:src="@drawable/ic_location"/>
+
+        <ProgressBar
+            android:layout_gravity="center"
+            android:id="@+id/locationProgress"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:visibility="gone"/>
+
+    </FrameLayout>
+
+
+</android.support.constraint.ConstraintLayout>

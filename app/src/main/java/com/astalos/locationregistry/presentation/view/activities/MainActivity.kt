@@ -1,15 +1,12 @@
-package com.astalos.locationregistry.presentation.view
+package com.astalos.locationregistry.presentation.view.activities
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import com.astalos.locationregistry.R
-import com.astalos.locationregistry.di.components.ApplicationComponent
 import com.astalos.locationregistry.domain.entities.User
 import com.astalos.locationregistry.domain.repository.Failure
-import com.astalos.locationregistry.presentation.RegistryApplication
 import com.astalos.locationregistry.presentation.extensions.doTransaction
 import com.astalos.locationregistry.presentation.viewmodel.UsersViewModel
 import kotlinx.android.synthetic.main.activity_main.*
@@ -19,11 +16,7 @@ import javax.inject.Inject
 /**
  * @author Tomasz Czura on 9/7/18.
  */
-class MainActivity : AppCompatActivity() {
-
-    val appComponent: ApplicationComponent by lazy {
-        (application as RegistryApplication).appComponent
-    }
+class MainActivity : BaseActivity() {
 
     private val locationsFrgment by lazy {
         supportFragmentManager.findFragmentById(R.id.locationsFragment)
@@ -40,7 +33,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        appComponent.inject(this)
+        activityComponent.inject(this)
         initNavigation()
         initViewModel()
     }
@@ -67,7 +60,7 @@ class MainActivity : AppCompatActivity() {
         viewModel.error.removeObservers(this)
     }
 
-    private fun handleError(it: Failure?) {
+    private fun handleError(error: Failure?) {
         toast(R.string.user_fetch_error).show()
         unsubscribeFromViewModel()
     }

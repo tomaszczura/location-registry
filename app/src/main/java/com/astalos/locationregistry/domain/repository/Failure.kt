@@ -7,6 +7,9 @@ sealed class Failure {
     class UnknownFailure : Failure()
     class NoUserFailure : Failure()
     class ActiveUserRemove : Failure()
+    class PermissionDeniedFailure: Failure()
+    class GPSDisabled: Failure()
+    class CancelFailure: Failure()
 
     abstract class DetailedFailure: Failure()
 }

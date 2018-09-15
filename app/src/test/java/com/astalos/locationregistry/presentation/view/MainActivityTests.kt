@@ -2,6 +2,7 @@ package com.astalos.locationregistry.presentation.view
 
 import android.support.design.widget.BottomNavigationView
 import com.astalos.locationregistry.R
+import com.astalos.locationregistry.presentation.view.activities.MainActivity
 import org.amshove.kluent.shouldNotBeNull
 import org.junit.Test
 import org.junit.runner.RunWith

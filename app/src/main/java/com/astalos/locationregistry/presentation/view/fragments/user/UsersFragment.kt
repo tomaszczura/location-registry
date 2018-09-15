@@ -30,7 +30,7 @@ class UsersFragment : BaseFragment(), UserRowActions {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        appComponent.inject(this)
+        activityComponent.inject(this)
 
         initViewModel()
     }

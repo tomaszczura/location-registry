@@ -1,5 +1,6 @@
 package com.astalos.locationregistry.model.memory
 
+import com.astalos.locationregistry.domain.entities.SimpleLocation
 import com.astalos.locationregistry.domain.entities.UserLocation
 import com.astalos.locationregistry.domain.repository.Failure
 import com.astalos.locationregistry.domain.repository.ILocationsRepository
@@ -19,4 +20,7 @@ class MemoryLocationsRepository @Inject constructor(): ILocationsRepository {
         locations.add(addedLocation)
         return OneOf.Success(addedLocation)
     }
+
+    override fun getCurrentLocation(): OneOf<Failure, SimpleLocation> = OneOf.Success(SimpleLocation(1.0, 1.0))
+
 }

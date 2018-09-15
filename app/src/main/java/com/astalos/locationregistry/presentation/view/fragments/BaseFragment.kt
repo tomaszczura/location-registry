@@ -7,8 +7,8 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.astalos.locationregistry.di.components.ApplicationComponent
-import com.astalos.locationregistry.presentation.RegistryApplication
+import com.astalos.locationregistry.di.components.ActivityComponent
+import com.astalos.locationregistry.presentation.view.activities.BaseActivity
 import javax.inject.Inject
 
 
@@ -18,8 +18,8 @@ import javax.inject.Inject
 abstract class BaseFragment : Fragment() {
     abstract val layoutId : Int
 
-    val appComponent: ApplicationComponent by lazy {
-        (activity?.application as RegistryApplication).appComponent
+    val activityComponent: ActivityComponent by lazy {
+        (activity!! as BaseActivity).activityComponent
     }
 
     @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -31,8 +31,8 @@ abstract class BaseFragment : Fragment() {
 abstract class BaseDialogFragment : DialogFragment() {
     abstract val layoutId : Int
 
-    val appComponent: ApplicationComponent by lazy {
-        (activity?.application as RegistryApplication).appComponent
+    val activityComponent: ActivityComponent by lazy {
+        (activity!! as BaseActivity).activityComponent
     }
 
     @Inject lateinit var viewModelFactory: ViewModelProvider.Factory

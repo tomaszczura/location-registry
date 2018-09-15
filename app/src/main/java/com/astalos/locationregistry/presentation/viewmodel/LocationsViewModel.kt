@@ -1,19 +1,30 @@
 package com.astalos.locationregistry.presentation.viewmodel
 
 import android.arch.lifecycle.MutableLiveData
+import com.astalos.locationregistry.domain.entities.SimpleLocation
 import com.astalos.locationregistry.domain.entities.UserLocation
+import com.astalos.locationregistry.domain.interactor.UseCase
 import com.astalos.locationregistry.domain.interactor.UserIdParams
 import com.astalos.locationregistry.domain.interactor.UserLocationParams
+import com.astalos.locationregistry.domain.interactor.locations.GetCurrentLocation
 import com.astalos.locationregistry.domain.interactor.locations.GetLocations
 import com.astalos.locationregistry.domain.interactor.locations.SaveLocation
+import com.astalos.locationregistry.domain.repository.Failure
 import javax.inject.Inject
 
 /**
  * @author Tomasz Czura on 9/10/18.
  */
 class LocationsViewModel @Inject constructor(private val getLocations: GetLocations,
-                                             private val saveLocation: SaveLocation) : BaseViewModel() {
+                                             private val saveLocation: SaveLocation,
+                                             private val getCurrentLocation: GetCurrentLocation) : BaseViewModel() {
     var locations = MutableLiveData<List<UserLocation>>()
+
+    var currentLocation = MutableLiveData<SimpleLocation>()
+
+    fun getCurrentLocation(onError: (Failure) -> Unit) {
+        getCurrentLocation.execute(UseCase.NoParams()) { it.oneOf( { error -> onError(error) }, ::handleCurrentLocationChange) }
+    }
 
     fun loadLocations(userId: Int) {
         getLocations.execute(UserIdParams(userId)) { it.oneOf(::handleError, ::handleLocationsChange) }
@@ -25,6 +36,10 @@ class LocationsViewModel @Inject constructor(private val getLocations: GetLocati
         }
     }
 
+    fun cancelCurrentLocationSearch() {
+        getCurrentLocation.cancel()
+    }
+
     private fun handleLocationSave(location: UserLocation, onSaved: (UserLocation) -> Unit) {
         val currentLocations = locations.value?.toMutableList() ?: mutableListOf()
         currentLocations.add(location)
@@ -34,5 +49,9 @@ class LocationsViewModel @Inject constructor(private val getLocations: GetLocati
 
     private fun handleLocationsChange(locations: List<UserLocation>) {
         this.locations.value = locations
+    }
+
+    private fun handleCurrentLocationChange(location: SimpleLocation) {
+        this.currentLocation.value = location
     }
 }

@@ -15,6 +15,9 @@
     <string name="longitude">Longitude</string>
     <string name="lat">Lat: %1$s</string>
     <string name="lng">Lng: %1$s</string>
+    <string name="get_location_error">Get location error</string>
+    <string name="gps_disabled_error">GPS disabled</string>
+    <string name="permission_denied">Permission denied</string>
 
     <string name="unknown_error">Unknown error</string>
 </resources>
