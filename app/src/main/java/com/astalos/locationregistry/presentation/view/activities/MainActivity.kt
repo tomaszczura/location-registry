@@ -8,6 +8,8 @@ import com.astalos.locationregistry.R
 import com.astalos.locationregistry.domain.entities.User
 import com.astalos.locationregistry.domain.repository.Failure
 import com.astalos.locationregistry.presentation.extensions.doTransaction
+import com.astalos.locationregistry.presentation.view.fragments.location.LocationsFragment
+import com.astalos.locationregistry.presentation.view.fragments.user.UsersFragment
 import com.astalos.locationregistry.presentation.viewmodel.UsersViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.toast
@@ -18,12 +20,12 @@ import javax.inject.Inject
  */
 class MainActivity : BaseActivity() {
 
-    private val locationsFrgment by lazy {
-        supportFragmentManager.findFragmentById(R.id.locationsFragment)
+    val locationsFrgment: LocationsFragment by lazy {
+        supportFragmentManager.findFragmentById(R.id.locationsFragment) as LocationsFragment
     }
 
-    private val usersFragment by lazy {
-        supportFragmentManager.findFragmentById(R.id.usersFragment)
+    val usersFragment: UsersFragment by lazy {
+        supportFragmentManager.findFragmentById(R.id.usersFragment) as UsersFragment
     }
 
     @Inject
@@ -33,7 +35,6 @@ class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        activityComponent.inject(this)
         initNavigation()
         initViewModel()
     }
@@ -88,4 +89,5 @@ class MainActivity : BaseActivity() {
             hide(locationsFragment)
         }
     }
+
 }

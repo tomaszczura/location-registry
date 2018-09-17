@@ -12,7 +12,7 @@ import javax.inject.Inject
 /**
  * @author Tomasz Czura on 9/7/18.
  */
-class UsersViewModel @Inject constructor(private val getUsers: GetUsers,
+open class UsersViewModel @Inject constructor(private val getUsersTask: GetUsers,
                                          private val createUser: CreateUser,
                                          private val editUser: EditUser,
                                          private val setActiveUser: SetActiveUser,
@@ -22,8 +22,8 @@ class UsersViewModel @Inject constructor(private val getUsers: GetUsers,
     var users = MutableLiveData<List<User>>()
     var activeUserId = MutableLiveData<Int>()
 
-    fun loadUsers() {
-        getUsers.execute(UseCase.NoParams()) { it.oneOf(::handleError, ::handleUsersChange) }
+    open fun loadUsers() {
+        getUsersTask.execute(UseCase.NoParams()) { it.oneOf(::handleError, ::handleUsersChange) }
     }
 
     fun saveUser(user: User, onSaved: (User) -> Unit, onError: (Failure) -> Unit) {
@@ -51,7 +51,7 @@ class UsersViewModel @Inject constructor(private val getUsers: GetUsers,
         setActiveUser.execute(UserIdParams(userId)) { it.oneOf(::handleError, ::handleSetActiveUser) }
     }
 
-    fun getActiveUser() {
+    open fun getActiveUser() {
         getActiveUser.execute(UseCase.NoParams()) { it -> it.oneOf({}, ::handleGetActiveUser) }
     }
 

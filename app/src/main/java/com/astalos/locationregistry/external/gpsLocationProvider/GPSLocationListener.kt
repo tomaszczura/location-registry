@@ -1,4 +1,4 @@
-package com.astalos.locationregistry.model.external.gpsLocationProvider
+package com.astalos.locationregistry.external.gpsLocationProvider
 
 import android.location.Location
 import android.location.LocationListener

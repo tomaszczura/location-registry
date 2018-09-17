@@ -15,7 +15,6 @@ import com.astalos.locationregistry.presentation.viewmodel.UsersViewModel
 import kotlinx.android.synthetic.main.fragment_users.*
 import org.jetbrains.anko.sdk25.coroutines.onClick
 import org.jetbrains.anko.support.v4.toast
-import javax.inject.Inject
 
 /**
  * @author Tomasz Czura on 9/7/18.
@@ -24,23 +23,24 @@ class UsersFragment : BaseFragment(), UserRowActions {
 
     override val layoutId = R.layout.fragment_users
 
-    @Inject lateinit var usersAdapter: UsersListAdapter
+    private val usersAdapter: UsersListAdapter by lazy {
+        UsersListAdapter()
+    }
 
     private lateinit var viewModel: UsersViewModel
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        activityComponent.inject(this)
-
-        initViewModel()
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.loadUsers()
         addUserBtn.onClick { showAddUserDialog() }
         initUsersList()
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        initViewModel()
+
+        viewModel.loadUsers()
     }
 
     private fun showAddUserDialog() {

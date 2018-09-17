@@ -8,6 +8,7 @@ import com.astalos.locationregistry.R
 import com.astalos.locationregistry.domain.entities.SimpleLocation
 import com.astalos.locationregistry.domain.entities.UserLocation
 import com.astalos.locationregistry.domain.repository.Failure
+import com.astalos.locationregistry.external.gpsLocationProvider.GPSLocationProvider
 import com.astalos.locationregistry.presentation.ErrorResolver
 import com.astalos.locationregistry.presentation.extensions.gone
 import com.astalos.locationregistry.presentation.extensions.show
@@ -28,6 +29,10 @@ class SaveLocationDialogFragment : BaseDialogFragment() {
 
     private lateinit var viewModel: LocationsViewModel
 
+    private val gpsLocationProvider: GPSLocationProvider by lazy {
+        GPSLocationProvider(activity!!)
+    }
+
     companion object {
         private const val USER_ID_ARG = "user_id_arg"
 
@@ -40,24 +45,22 @@ class SaveLocationDialogFragment : BaseDialogFragment() {
         }
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        activityComponent.inject(this)
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initLocationsViewModel()
         saveBtn.onClick { onSaveClick() }
         cancelBtn.onClick { dismiss() }
         getLocationBtn.onClick { getCurrentLocation() }
     }
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        initLocationsViewModel()
+    }
+
     override fun onDestroy() {
         super.onDestroy()
-        viewModel.cancelCurrentLocationSearch()
+        gpsLocationProvider.cancel()
     }
 
     private fun initLocationsViewModel() {
@@ -87,7 +90,7 @@ class SaveLocationDialogFragment : BaseDialogFragment() {
 
     private fun getCurrentLocation() {
         showLocationLoading()
-        viewModel.getCurrentLocation(::handleCurrentLocationError)
+        viewModel.getCurrentLocation(gpsLocationProvider, ::handleCurrentLocationError)
     }
 
     private fun handleCurrentLocation(location: SimpleLocation?) {

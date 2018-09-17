@@ -1,4 +1,4 @@
-package com.astalos.locationregistry.model.external.gpsLocationProvider
+package com.astalos.locationregistry.external.gpsLocationProvider
 
 import android.Manifest
 import android.app.Activity
@@ -6,8 +6,8 @@ import android.content.Context
 import android.location.LocationManager
 import com.astalos.locationregistry.domain.ILocationProvider
 import com.astalos.locationregistry.domain.entities.SimpleLocation
-import com.astalos.locationregistry.domain.repository.Failure
 import com.astalos.locationregistry.domain.interactor.OneOf
+import com.astalos.locationregistry.domain.repository.Failure
 import com.karumi.dexter.Dexter
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.launch

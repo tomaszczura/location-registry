@@ -37,13 +37,6 @@ class SaveUserDialogFragment : BaseDialogFragment() {
         }
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        activityComponent.inject(this)
-        initViewModel()
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -51,6 +44,11 @@ class SaveUserDialogFragment : BaseDialogFragment() {
         saveBtn.onClick { onSaveClick() }
         cancelBtn.onClick { dismiss() }
         userName.setText(passedUser?.name ?: "")
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        initViewModel()
     }
 
     private fun initViewModel() {

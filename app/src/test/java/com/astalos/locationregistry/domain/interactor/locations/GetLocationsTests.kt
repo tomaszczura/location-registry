@@ -43,6 +43,4 @@ class GetLocationsTests {
         val returnedLocations = runBlocking { getLocations.run(UserIdParams(1)) }
         returnedLocations shouldEqual OneOf.Success(locations)
     }
-
-
 }

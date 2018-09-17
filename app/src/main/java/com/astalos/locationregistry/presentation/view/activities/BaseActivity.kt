@@ -1,21 +1,18 @@
 package com.astalos.locationregistry.presentation.view.activities
 
+import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
-import com.astalos.locationregistry.di.components.ActivityComponent
-import com.astalos.locationregistry.di.components.DaggerActivityComponent
-import com.astalos.locationregistry.di.modules.ActivityModule
-import com.astalos.locationregistry.presentation.RegistryApplication
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.support.HasSupportFragmentInjector
+import javax.inject.Inject
 
 /**
  * @author Tomasz Czura on 9/13/18.
  */
-abstract class BaseActivity: AppCompatActivity() {
+abstract class BaseActivity: AppCompatActivity(), HasSupportFragmentInjector {
 
-    val activityComponent: ActivityComponent by lazy {
-        DaggerActivityComponent
-                .builder()
-                .applicationComponent((application as RegistryApplication).appComponent)
-                .activityModule(ActivityModule(this))
-                .build()
-    }
+    @Inject
+    lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Fragment>
+
+    override fun supportFragmentInjector() = dispatchingAndroidInjector
 }

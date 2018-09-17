@@ -1,16 +1,18 @@
 package com.astalos.locationregistry.model.memory
 
+import com.astalos.locationregistry.domain.ILocationProvider
 import com.astalos.locationregistry.domain.entities.SimpleLocation
 import com.astalos.locationregistry.domain.entities.UserLocation
+import com.astalos.locationregistry.domain.interactor.OneOf
 import com.astalos.locationregistry.domain.repository.Failure
 import com.astalos.locationregistry.domain.repository.ILocationsRepository
-import com.astalos.locationregistry.domain.interactor.OneOf
 import javax.inject.Inject
 
 /**
  * @author Tomasz Czura on 9/4/18.
  */
-class MemoryLocationsRepository @Inject constructor(): ILocationsRepository {
+class MemoryLocationsRepository @Inject constructor() : ILocationsRepository {
+
     private val locations = mutableListOf<UserLocation>()
 
     override fun locations(userId: Int): OneOf<Failure, List<UserLocation>> = OneOf.Success(locations.filter { it.userId == userId })
@@ -21,6 +23,5 @@ class MemoryLocationsRepository @Inject constructor(): ILocationsRepository {
         return OneOf.Success(addedLocation)
     }
 
-    override fun getCurrentLocation(): OneOf<Failure, SimpleLocation> = OneOf.Success(SimpleLocation(1.0, 1.0))
-
+    override fun getCurrentLocation(provider: ILocationProvider): OneOf<Failure, SimpleLocation> = OneOf.Success(SimpleLocation(1.0, 1.0))
 }

@@ -1,5 +1,6 @@
 package com.astalos.locationregistry.domain.repository
 
+import com.astalos.locationregistry.domain.ILocationProvider
 import com.astalos.locationregistry.domain.entities.SimpleLocation
 import com.astalos.locationregistry.domain.entities.UserLocation
 import com.astalos.locationregistry.domain.interactor.OneOf
@@ -11,6 +12,5 @@ interface ILocationsRepository {
     fun locations(userId: Int): OneOf<Failure, List<UserLocation>>
     fun addLocation(location: UserLocation): OneOf<Failure, UserLocation>
 
-    fun getCurrentLocation(): OneOf<Failure, SimpleLocation>
-    fun cancelGetCurrentLocation() {}
+    fun getCurrentLocation(provider: ILocationProvider): OneOf<Failure, SimpleLocation>
 }

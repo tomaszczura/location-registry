@@ -1,10 +1,9 @@
 package com.astalos.locationregistry.model.database
 
-import android.content.Context
 import com.astalos.locationregistry.domain.entities.User
+import com.astalos.locationregistry.domain.interactor.OneOf
 import com.astalos.locationregistry.domain.repository.Failure
 import com.astalos.locationregistry.domain.repository.IUsersRepository
-import com.astalos.locationregistry.domain.interactor.OneOf
 import com.astalos.locationregistry.model.entity.toEntity
 import com.astalos.locationregistry.model.entity.toUser
 import javax.inject.Inject
@@ -12,8 +11,8 @@ import javax.inject.Inject
 /**
  * @author Tomasz Czura on 9/10/18.
  */
-class DatabaseUsersRepository @Inject constructor(private val context: Context) : IUsersRepository {
-    private val database by lazy { AppDatabase.getInstance(context) }
+class DatabaseUsersRepository @Inject constructor() : IUsersRepository {
+    @Inject lateinit var database: AppDatabase
 
     override fun setActiveUser(userId: Int): OneOf<Failure, User> =
             OneOf.Success(database.userDao.setActiveUser(userId.toLong()).toUser())

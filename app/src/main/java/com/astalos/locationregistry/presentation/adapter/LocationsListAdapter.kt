@@ -27,7 +27,7 @@ class LocationsListAdapter @Inject constructor() : RecyclerView.Adapter<Location
         holder.bind(locations[position])
     }
 
-    class LocationViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    public class LocationViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val dateFormat = SimpleDateFormat("dd-MM-yyyy HH:mm")
 
         val latitude = view.find<TextView>(R.id.latitude)

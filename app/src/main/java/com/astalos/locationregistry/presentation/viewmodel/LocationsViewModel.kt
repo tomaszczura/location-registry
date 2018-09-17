@@ -1,9 +1,10 @@
 package com.astalos.locationregistry.presentation.viewmodel
 
 import android.arch.lifecycle.MutableLiveData
+import com.astalos.locationregistry.domain.ILocationProvider
 import com.astalos.locationregistry.domain.entities.SimpleLocation
 import com.astalos.locationregistry.domain.entities.UserLocation
-import com.astalos.locationregistry.domain.interactor.UseCase
+import com.astalos.locationregistry.domain.interactor.GetCurrentLocationParams
 import com.astalos.locationregistry.domain.interactor.UserIdParams
 import com.astalos.locationregistry.domain.interactor.UserLocationParams
 import com.astalos.locationregistry.domain.interactor.locations.GetCurrentLocation
@@ -15,18 +16,18 @@ import javax.inject.Inject
 /**
  * @author Tomasz Czura on 9/10/18.
  */
-class LocationsViewModel @Inject constructor(private val getLocations: GetLocations,
+open class LocationsViewModel @Inject constructor(private val getLocations: GetLocations,
                                              private val saveLocation: SaveLocation,
                                              private val getCurrentLocation: GetCurrentLocation) : BaseViewModel() {
     var locations = MutableLiveData<List<UserLocation>>()
 
     var currentLocation = MutableLiveData<SimpleLocation>()
 
-    fun getCurrentLocation(onError: (Failure) -> Unit) {
-        getCurrentLocation.execute(UseCase.NoParams()) { it.oneOf( { error -> onError(error) }, ::handleCurrentLocationChange) }
+    fun getCurrentLocation(provider: ILocationProvider, onError: (Failure) -> Unit) {
+        getCurrentLocation.execute(GetCurrentLocationParams(provider)) { it.oneOf( { error -> onError(error) }, ::handleCurrentLocationChange) }
     }
 
-    fun loadLocations(userId: Int) {
+    open fun loadLocations(userId: Int) {
         getLocations.execute(UserIdParams(userId)) { it.oneOf(::handleError, ::handleLocationsChange) }
     }
 
@@ -34,10 +35,6 @@ class LocationsViewModel @Inject constructor(private val getLocations: GetLocati
         saveLocation.execute(UserLocationParams(location)) {
             it.oneOf(::handleError) { location -> handleLocationSave(location, onSaved) }
         }
-    }
-
-    fun cancelCurrentLocationSearch() {
-        getCurrentLocation.cancel()
     }
 
     private fun handleLocationSave(location: UserLocation, onSaved: (UserLocation) -> Unit) {
