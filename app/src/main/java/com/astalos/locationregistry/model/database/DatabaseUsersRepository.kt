@@ -11,8 +11,7 @@ import javax.inject.Inject
 /**
  * @author Tomasz Czura on 9/10/18.
  */
-class DatabaseUsersRepository @Inject constructor() : IUsersRepository {
-    @Inject lateinit var database: AppDatabase
+class DatabaseUsersRepository @Inject constructor(private val database: AppDatabase) : IUsersRepository {
 
     override fun setActiveUser(userId: Int): OneOf<Failure, User> =
             OneOf.Success(database.userDao.setActiveUser(userId.toLong()).toUser())

@@ -1,4 +1,4 @@
-package com.astalos.locationregistry.external.gpsLocationProvider
+package com.astalos.locationregistry.model.gpsLocationProvider
 
 import android.Manifest
 import android.app.Activity
@@ -12,13 +12,12 @@ import com.karumi.dexter.Dexter
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.launch
 import kotlinx.coroutines.experimental.runBlocking
-import javax.inject.Inject
 import kotlin.coroutines.experimental.suspendCoroutine
 
 /**
  * @author Tomasz Czura on 9/12/18.
  */
-class GPSLocationProvider @Inject constructor(private val activity: Activity) : ILocationProvider {
+class GPSLocationProvider constructor(var activity: Activity) : ILocationProvider {
 
     private var locationManager: LocationManager? = null
     private var locationListener: GPSLocationListener? = null
@@ -52,7 +51,7 @@ class GPSLocationProvider @Inject constructor(private val activity: Activity) : 
         }
     }
 
-    fun cancel() {
+    override fun cancel() {
         locationListener?.unsubscribe()
         locationListener = null
         locationManager = null

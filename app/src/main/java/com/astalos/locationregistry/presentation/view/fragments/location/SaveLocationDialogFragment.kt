@@ -8,7 +8,6 @@ import com.astalos.locationregistry.R
 import com.astalos.locationregistry.domain.entities.SimpleLocation
 import com.astalos.locationregistry.domain.entities.UserLocation
 import com.astalos.locationregistry.domain.repository.Failure
-import com.astalos.locationregistry.external.gpsLocationProvider.GPSLocationProvider
 import com.astalos.locationregistry.presentation.ErrorResolver
 import com.astalos.locationregistry.presentation.extensions.gone
 import com.astalos.locationregistry.presentation.extensions.show
@@ -28,10 +27,6 @@ class SaveLocationDialogFragment : BaseDialogFragment() {
     override val layoutId: Int = R.layout.fragment_add_location
 
     private lateinit var viewModel: LocationsViewModel
-
-    private val gpsLocationProvider: GPSLocationProvider by lazy {
-        GPSLocationProvider(activity!!)
-    }
 
     companion object {
         private const val USER_ID_ARG = "user_id_arg"
@@ -60,7 +55,7 @@ class SaveLocationDialogFragment : BaseDialogFragment() {
 
     override fun onDestroy() {
         super.onDestroy()
-        gpsLocationProvider.cancel()
+        viewModel.cancelGetCurrentLocation()
     }
 
     private fun initLocationsViewModel() {
@@ -90,7 +85,7 @@ class SaveLocationDialogFragment : BaseDialogFragment() {
 
     private fun getCurrentLocation() {
         showLocationLoading()
-        viewModel.getCurrentLocation(gpsLocationProvider, ::handleCurrentLocationError)
+        viewModel.getCurrentLocation(activity!!, ::handleCurrentLocationError)
     }
 
     private fun handleCurrentLocation(location: SimpleLocation?) {

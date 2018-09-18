@@ -1,4 +1,4 @@
-package com.astalos.locationregistry.external.gpsLocationProvider
+package com.astalos.locationregistry.model.gpsLocationProvider
 
 import com.astalos.locationregistry.domain.repository.Failure
 import com.astalos.locationregistry.domain.interactor.OneOf

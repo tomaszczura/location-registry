@@ -1,30 +1,36 @@
 package com.astalos.locationregistry.presentation.viewmodel
 
+import android.app.Activity
 import android.arch.lifecycle.MutableLiveData
-import com.astalos.locationregistry.domain.ILocationProvider
 import com.astalos.locationregistry.domain.entities.SimpleLocation
 import com.astalos.locationregistry.domain.entities.UserLocation
-import com.astalos.locationregistry.domain.interactor.GetCurrentLocationParams
+import com.astalos.locationregistry.domain.interactor.UseCase
 import com.astalos.locationregistry.domain.interactor.UserIdParams
 import com.astalos.locationregistry.domain.interactor.UserLocationParams
 import com.astalos.locationregistry.domain.interactor.locations.GetCurrentLocation
 import com.astalos.locationregistry.domain.interactor.locations.GetLocations
 import com.astalos.locationregistry.domain.interactor.locations.SaveLocation
 import com.astalos.locationregistry.domain.repository.Failure
+import com.astalos.locationregistry.model.gpsLocationProvider.GPSLocationProvider
 import javax.inject.Inject
 
 /**
  * @author Tomasz Czura on 9/10/18.
  */
 open class LocationsViewModel @Inject constructor(private val getLocations: GetLocations,
-                                             private val saveLocation: SaveLocation,
-                                             private val getCurrentLocation: GetCurrentLocation) : BaseViewModel() {
+                                                  private val saveLocation: SaveLocation) : BaseViewModel() {
+
+    private var getCurrentLocation: GetCurrentLocation? = null
+
     var locations = MutableLiveData<List<UserLocation>>()
 
     var currentLocation = MutableLiveData<SimpleLocation>()
 
-    fun getCurrentLocation(provider: ILocationProvider, onError: (Failure) -> Unit) {
-        getCurrentLocation.execute(GetCurrentLocationParams(provider)) { it.oneOf( { error -> onError(error) }, ::handleCurrentLocationChange) }
+    fun getCurrentLocation(activity: Activity, onError: (Failure) -> Unit) {
+        if (getCurrentLocation == null) {
+            getCurrentLocation = GetCurrentLocation(GPSLocationProvider(activity))
+        }
+        getCurrentLocation?.execute(UseCase.NoParams()) { it.oneOf({ error -> onError(error) }, ::handleCurrentLocationChange) }
     }
 
     open fun loadLocations(userId: Int) {
@@ -50,5 +56,9 @@ open class LocationsViewModel @Inject constructor(private val getLocations: GetL
 
     private fun handleCurrentLocationChange(location: SimpleLocation) {
         this.currentLocation.value = location
+    }
+
+    public fun cancelGetCurrentLocation() {
+        getCurrentLocation?.cancel()
     }
 }
