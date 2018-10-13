@@ -86,7 +86,7 @@ dependencies {
     testImplementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     testImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
     testImplementation "android.arch.persistence.room:testing:$arch_components_version"
-    testCompile "org.robolectric:shadows-supportv4:$robolectric_version"
+    testImplementation "org.robolectric:shadows-supportv4:$robolectric_version"
 
     androidTestImplementation "org.mockito:mockito-android:2.22.0"
     androidTestImplementation "com.android.support.test.espresso:espresso-core:$espresso_version"
